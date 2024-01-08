@@ -31,18 +31,19 @@ pipeline {
                     // Print the current workspace directory to verify its location
                     echo "Current workspace: ${pwd()}"
                     
-                    // Build server-side image
+                    // Build server-side image with tag latest
                     dir('AudiTech-server-side') {
                         sh 'docker build -t khalilbchir/server-side:latest .'
                     }
         
-                    // Build client-side image
+                    // Build client-side image with tag latest
                     dir('AudiTech-client-side') {
                         sh 'docker build -t khalilbchir/client-side:latest .'
                     }
                 }
             }
         }
+
 
 
         stage('Deliver') {
