@@ -27,10 +27,23 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/server-side:$BUILD_ID .'
-                sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/client-side:$BUILD_ID ./client-side'
+                script {
+                    // Print the current workspace directory to verify its location
+                    echo "Current workspace: ${pwd()}"
+                    
+                    // Build server-side image
+                    dir('AudiTech-server-side') {
+                        sh 'docker build -t khalilbchir/server-side:2 .'
+                    }
+        
+                    // Build client-side image
+                    dir('AudiTech-client-side') {
+                        sh 'docker build -t khalilbchir/client-side:2 .'
+                    }
+                }
             }
         }
+
 
         stage('Deliver') {
             steps {
