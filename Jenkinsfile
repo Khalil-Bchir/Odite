@@ -19,13 +19,15 @@ pipeline {
 
         stage('Initialization') {
             steps {
+                sh 'mkdir -p $HOME/.docker'
+                sh 'echo "{\"auths\":{\"https://index.docker.io/v1/\":{\"auth\":\"${DOCKERHUB_CREDENTIALS}\"}}}" > $HOME/.docker/config.json'
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/server-side:$BUILD_ID ./server-side'
+                sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/server-side:$BUILD_ID .'
                 sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/client-side:$BUILD_ID ./client-side'
             }
         }
