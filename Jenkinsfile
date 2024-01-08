@@ -33,12 +33,12 @@ pipeline {
                     
                     // Build server-side image with tag latest
                     dir('AudiTech-server-side') {
-                        sh 'docker build -t khalilbchir/server-side:latest .'
+                        sh 'docker build -t khalilbchir/server-side .'
                     }
         
                     // Build client-side image with tag latest
                     dir('AudiTech-client-side') {
-                        sh 'docker build -t khalilbchir/client-side:latest .'
+                        sh 'docker build -t khalilbchir/client-side.'
                     }
                 }
             }
