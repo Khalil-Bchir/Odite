@@ -33,12 +33,12 @@ pipeline {
                     
                     // Build server-side image
                     dir('AudiTech-server-side') {
-                        sh 'docker build -t khalilbchir/server-side:2 .'
+                        sh 'docker build -t khalilbchir/server-side:latest .'
                     }
         
                     // Build client-side image
                     dir('AudiTech-client-side') {
-                        sh 'docker build -t khalilbchir/client-side:2 .'
+                        sh 'docker build -t khalilbchir/client-side:latest .'
                     }
                 }
             }
