@@ -48,8 +48,8 @@ pipeline {
 
         stage('Deliver') {
             steps {
-                sh 'docker push $DOCKERHUB_CREDENTIALS_USR/server-side:$BUILD_ID'
-                sh 'docker push $DOCKERHUB_CREDENTIALS_USR/client-side:$BUILD_ID'
+                sh 'docker push $DOCKERHUB_CREDENTIALS_USR/server-side:latest'
+                sh 'docker push $DOCKERHUB_CREDENTIALS_USR/client-side:latest'
             }
         }
 
@@ -65,8 +65,8 @@ pipeline {
 
         stage('Cleanup') {
             steps {
-                sh 'docker rmi $DOCKERHUB_CREDENTIALS_USR/server-side:$BUILD_ID'
-                sh 'docker rmi $DOCKERHUB_CREDENTIALS_USR/client-side:$BUILD_ID'
+                sh 'docker rmi $DOCKERHUB_CREDENTIALS_USR/server-side:latest'
+                sh 'docker rmi $DOCKERHUB_CREDENTIALS_USR/client-side:latest'
                 sh 'docker logout'
             }
         }
