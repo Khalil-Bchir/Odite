@@ -38,7 +38,7 @@ pipeline {
         
                     // Build client-side image with tag latest
                     dir('AudiTech-client-side') {
-                        sh 'docker build -t khalilbchir/client-side.'
+                        sh 'docker build -t khalilbchir/client-side .'
                     }
                 }
             }
