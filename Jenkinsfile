@@ -53,15 +53,6 @@ pipeline {
             }
         }
 
-        stage('Kubernetes Deployment') {
-            steps {
-                sh 'kubectl apply -f kubernetes/server-deployment.yaml'
-                sh 'kubectl apply -f kubernetes/server-service.yaml'
-
-                sh 'kubectl apply -f kubernetes/client-deployment.yaml'
-                sh 'kubectl apply -f kubernetes/client-service.yaml'
-            }
-        }
 
         stage('Cleanup') {
             steps {
