@@ -1,0 +1,83 @@
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+      <div>
+        <h5 class="m-0 font-weight-bold text-primary">Companies</h5>
+      </div>
+      <div>
+        <a class="btn btn-primary btn-icon-split" data-toggle="modal"
+        data-target="#createCompanyModal">
+          <span class="icon text-white-50">
+            <i class="fas fa-plus"></i>
+          </span>
+          <span class="text">Add Company</span>
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Company ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Company ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Actions</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <tr *ngFor="let company of companies">
+              <td>{{ company.companySheetId }}</td>
+              <td>{{ company.companyName }}</td>
+              <td>{{ company.email }}</td>
+              <td>{{ company.address }}</td>
+              <td>
+                <span class="mr-2">
+                  <a [routerLink]="['./company-details', company.companySheetId]" class="btn btn-info btn-circle btn-sm">
+                    <i class="fas fa-info-circle"></i>
+                  </a>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="createCompanyModal" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header card-header py-3">
+      <h5 class="m-0 font-weight-bold text-primary">Create Company</h5>
+      <button type="button" class="close" data-dismiss="modal"
+        aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-create-company></app-create-company>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+</div>

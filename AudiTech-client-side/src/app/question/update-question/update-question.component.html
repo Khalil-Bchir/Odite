@@ -1,0 +1,45 @@
+<!-- update-question.component.html -->
+
+<div class="container mt-4">
+  <h4>Update Question</h4>
+  <!-- Your form for updating the question goes here -->
+  <form (ngSubmit)="updateQuestion()">
+
+    <div class="form-group">
+      <label for="type">Question Type</label>
+      <select id="type" [(ngModel)]="updatedQuestion.type" name="type"
+        class="form-control">
+        <option value="multiple">Multiple Choice</option>
+        <option value="text">Text</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="updatedQuestionText">Question Text</label>
+      <input type="text" class="form-control" id="updatedQuestionText"
+        name="updatedQuestionText" [(ngModel)]="updatedQuestion.questionText"
+        required>
+    </div>
+
+
+      <div *ngIf="updatedQuestion.type === 'multiple'" class="form-group">
+        <label for="updatedChoices">Choices</label>
+
+        <div *ngFor="let choice of updatedQuestion.choices; let i = index; trackBy: trackByFn">
+          <input type="text" class="form-control" id="updatedChoices{{i}}" name="updatedChoices{{i}}" [(ngModel)]="updatedQuestion.choices[i]" required *ngIf="updatedQuestion && updatedQuestion.choices">
+          <div class="input-group-append">
+            <button type="button" class="btn btn-danger" (click)="removeChoice(i)">Remove</button>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-success" (click)="addChoice()">Add Choice</button>
+      </div>
+
+    <div class="form-group">
+      <label for="comment">Comment</label>
+      <textarea id="comment" [(ngModel)]="updatedQuestion.comment" name="comment" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Question</button>
+  </form>
+</div>

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+        - name: server
+          image: khalilbchir/server-side
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MONGO_URI
+              value: "mongodb+srv://prestigeproformation:prestigeproformation@cluster0.guzmh23.mongodb.net/?retryWrites=true&w=majority"
+            - name: PORT
+              value: "3000"

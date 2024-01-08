@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Create Question</h2>
+
+  <form (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="type">Question Type</label>
+      <select id="type" [(ngModel)]="questionData.type" name="type" class="form-control">
+        <option value="multiple">Multiple Choice</option>
+        <option value="text">Text</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="questionText">Question Text</label>
+      <textarea id="questionText" [(ngModel)]="questionData.questionText" name="questionText" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group" *ngIf="questionData.type === 'multiple'">
+      <label for="choices">Choices</label>
+
+      <div>
+        <div *ngFor="let choiceModel of choicesModel; let i = index; trackBy: trackByFn" class="input-group mb-2">
+          <input type="text" [(ngModel)]="choicesModel[i]" name="choices" class="form-control" />
+          <div class="input-group-append">
+            <button type="button" class="btn btn-danger" (click)="removeChoice(i)">Remove</button>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-success" (click)="addChoice()">Add Choice</button>
+    </div>
+
+    <div class="form-group">
+      <label for="comment">Comment</label>
+      <textarea id="comment" [(ngModel)]="questionData.comment" name="comment" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Create Question</button>
+    </div>
+  </form>
+</div>

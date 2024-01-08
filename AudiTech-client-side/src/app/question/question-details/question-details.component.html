@@ -1,0 +1,63 @@
+<!-- Arrow icon button with dropdown -->
+<div class="dropdown float-right">
+  <button class="btn btn-secondary" type="button" id="dropdownMenuButton"
+    data-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-100"></i>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <!-- Dropdown items -->
+    <a class="dropdown-item" data-toggle="modal" [attr.data-target]="'#updateQModal' + question?.questionID">Update this Question</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" data-toggle="modal" [attr.data-target]="'#deleteQModal' + question?.questionID">Delete this Question</a>
+  </div>
+</div>
+<div *ngIf="question" class="question-details-container mt-4 p-4 rounded">
+  <h2 class="question-title mb-3">{{ question.questionText }}</h2>
+  <div *ngIf="question.type === 'multiple'" class="multiple-choices">
+    <h3>Choices:</h3>
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let choice of question.choices" class="list-group-item">{{ choice }}</li>
+    </ul>
+  </div>
+  <p class="question-description mb-4">{{ question.comment }}</p>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" [id]="'updateQModal' + question?.questionID" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Question</h5>
+        <button type="button" class="close" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" [id]="'deleteQModal' + question?.questionID" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+        <button type="button" class="close" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Add your delete confirmation content here -->
+      </div>
+    </div>
+  </div>
+</div>

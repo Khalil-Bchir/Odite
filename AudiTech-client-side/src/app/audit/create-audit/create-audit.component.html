@@ -1,0 +1,73 @@
+<div class="container mt-4">
+  <div class="row">
+
+    <!-- Left side - Headings -->
+    <div class="col-md-6">
+      <div class="card mx-auto">
+        <div class="card-header">Headings</div>
+        <div class="card-body">
+          <div class="list-group">
+            <button *ngFor="let heading of headings"
+              (click)="selectHeading(heading)"
+              class="list-group-item list-group-item-action{{ isSelectedHeading(heading) ? ' active' : '' }}">
+              {{ heading.title }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right side - Questions -->
+    <div class="col-md-6">
+      <div class="card mt-4 mx-auto">
+        <div class="card-header">Questions</div>
+        <div class="card-body">
+          <div class="list-group">
+            <a *ngFor="let question of questions"
+              (click)="toggleQuestionSelection(question)"
+              class="list-group-item list-group-item-action">
+              {{ question.questionText }}
+              <!-- Display choices if question type is 'multiple' -->
+              <div *ngIf="question.type === 'multiple'">
+                <small>Choices: {{ question.choices?.join(', ') }}</small>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Answer input fields -->
+    <div *ngIf="selectedQuestions.length > 0" class="col-md-12 mt-4">
+      <div class="card mx-auto">
+        <div class="card-header">Answer Questions</div>
+        <div class="card-body">
+          <form (ngSubmit)="saveAudit(auditForm)" #auditForm="ngForm">
+            <div *ngFor="let question of selectedQuestions" class="mb-3">
+              <label class="form-label">{{ question.questionText }}</label>
+              <!-- Display choices input only if question type is 'multiple' -->
+              <div *ngIf="question.type === 'multiple'">
+                <select [(ngModel)]="answers[question.questionID]"
+                  name="answers[{{ question.questionID }}]"
+                  class="form-control">
+                  <option *ngFor="let choice of question.choices"
+                    [value]="choice">{{ choice }}</option>
+                </select>
+              </div>
+              <!-- Display text input for other question types -->
+              <div *ngIf="question.type !== 'multiple'">
+                <input [(ngModel)]="answers[question.questionID]"
+                  name="answers[{{ question.questionID }}]" type="text"
+                  class="form-control" />
+              </div>
+            </div>
+            <!-- Save button -->
+            <button type="submit" class="btn btn-primary mt-3">Save
+              Audit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

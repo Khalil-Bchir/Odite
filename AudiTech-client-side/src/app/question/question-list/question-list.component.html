@@ -1,0 +1,150 @@
+<!-- question-list.component.html -->
+
+<div class="container mt-4">
+  <div class="row d-flex justify-content-between align-items-center">
+    <div class="col-md-6">
+      <h4>Questions</h4>
+    </div>
+    <div class="col-md-6 text-right" *ngIf="sharedService.getUserType()=='SAD'">
+      <a type="button" class="btn btn-primary btn-icon-split"
+        data-toggle="modal" data-target="#createQModal">
+        <span class="icon text-white-50">
+          <i class="fas fa-plus"></i>
+        </span>
+        <span class="text">Create New Question</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="questions.length > 0;" class="container mt-4">
+  <!-- Bootstrap Cards -->
+  <div class="card-deck">
+    <div *ngFor="let question of questions; let i = index" class="col-lg-3 col-md-6 mb-3">
+      <div class="card border-primary">
+        <div class="card-header bg-primary text-light" data-toggle="collapse" [attr.data-target]="'#choicesCollapse' + i">
+          Question {{ i + 1 }}
+          <span class="float-right" [ngClass]="{'fa-chevron-down': isChoicesCollapsed[i], 'fa-chevron-up': !isChoicesCollapsed[i]}"></span>
+        </div>
+        <div class="card-body text-dark">
+          <div *ngIf="question" class="question-details-container mt-4 p-4 rounded">
+            <h5 class="card-title">{{ question.questionText }}</h5>
+            <h5 class="card-title">( {{ question.type }} )</h5>
+            <!-- Choices Collapse -->
+            <div [ngClass]="{'collapse': isChoicesCollapsed[i]}" [attr.id]="'choicesCollapse' + i">
+              <div *ngIf="question.type === 'multiple'" class="multiple-choices">
+                <h6>Choices:</h6>
+                <ul class="list-group list-group-flush">
+                  <li *ngFor="let choice of question.choices" class="list-group-item">{{ choice }}</li>
+                </ul>
+              </div>
+            </div>
+            <p class="card-text">{{ question.comment }}</p>
+
+            <hr *ngIf="sharedService.getUserType()=='SAD'" />
+            <div class="row" *ngIf="sharedService.getUserType()=='SAD'">
+              <div class="col-sm-12">
+                <!-- Buttons for actions -->
+                <a class="btn btn-primary mr-2" (click)="onUpdateClick(question.questionID)" data-toggle="modal" data-target="#updateQModal">Edit</a>
+                <a class="btn btn-danger btn-icon-split" (click)="onUpdateClick(question.questionID)" data-toggle="modal" data-target="#deleteQModal">
+                  <span class="icon text">
+                    <i class="fas fa-trash"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="updateQModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Question</h5>
+        <button class="close" type="button" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <app-update-question></app-update-question>
+      <div class="modal-footer">
+        <div class="container-fluid">
+          <div class="row justify-content-end">
+            <!-- Cancel Button -->
+            <div class="col-auto">
+              <button type="button" class="btn btn-secondary ml-2"
+                data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteQModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Question</h5>
+        <button class="close" type="button" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body"> <app-delete-question></app-delete-question></div>
+      <div class="modal-footer">
+        <div class="container-fluid">
+          <div class="row justify-content-end">
+
+            <!-- Cancel Button -->
+            <div class="col-auto">
+              <button type="button" class="btn btn-secondary ml-2"
+                data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Create -->
+<div class="modal fade" id="createQModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!-- Modal content for creating a question goes here -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create Question</h5>
+        <button class="close" type="button" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-create-question></app-create-question>
+      </div>
+      <div class="modal-footer">
+        <div class="container-fluid">
+          <div class="row justify-content-end">
+            <!-- Cancel Button -->
+            <div class="col-auto">
+              <button type="button" class="btn btn-secondary ml-2"
+                data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

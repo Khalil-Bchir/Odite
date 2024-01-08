@@ -1,0 +1,82 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid d-flex justify-content-center align-items-center">
+  <div class="card m-4"> <!-- Adjusted width to col-md-8 -->
+    <div class="card-header bg-primary text-light">
+      <h5 class="m-0 font-weight-bold">{{ heading.title }}</h5>
+    </div>
+      <app-question-list></app-question-list>
+    <div class="card-body" *ngIf="sharedService.getUserType()=='SAD'">
+      <hr />
+      <div class="row">
+        <div class="col-sm-12">
+          <!-- Buttons for actions -->
+          <a class="btn btn-primary mr-2" data-toggle="modal" data-target="#editUserModal">Edit</a>
+
+          <a class="btn btn-danger btn-icon-split" data-toggle="modal" data-target="#deleteHModal">
+            <span class="icon text">
+              <i class="fas fa-trash"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modals -->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header card-header py-3">
+        <h5 class="m-0 font-weight-bold text-primary">Update Heading</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <app-update-heading></app-update-heading>
+      </div>
+
+      <div class="modal-footer">
+        <div class="container-fluid">
+          <div class="row justify-content-end">
+
+            <!-- Cancel Button -->
+            <div class="col-auto">
+              <button type="button" class="btn btn-secondary ml-2" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modals -->
+<div class="modal fade" id="deleteHModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header card-header py-3">
+        <h5 class="m-0 font-weight-bold text-primary">Delete Heading?</h5>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <app-delete-heading></app-delete-heading>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="container">
+
+          <form (ngSubmit)="createHeading()" #headingForm="ngForm">
+            <div class="form-row align-items-center">
+              <!-- Title Input -->
+              <div class="col-sm-8 my-1">
+                <label for="title" class="sr-only">Title</label>
+                <input type="text" id="title" name="title" class="form-control" [(ngModel)]="heading.title" required placeholder="Title">
+              </div>
+              <!-- Require Sections Checkbox -->
+              <!--div class="col-auto my-1">
+                <div class="form-check">
+                  <input type="checkbox" id="requireSections" name="requireSections" class="form-check-input"
+                    [(ngModel)]="heading.requireSections">
+                  <label for="requireSections" class="form-check-label text-gray-900 ">Require Sections</label>
+                </div>
+              </div-->
+              <!-- Tick Icon Button -->
+              <div class="col-auto my-1">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-check"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <div class="text-danger mt-3">{{ errorMessage }}</div>
+        </div>
+      

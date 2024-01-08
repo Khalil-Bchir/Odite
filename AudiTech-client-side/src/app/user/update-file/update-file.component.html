@@ -1,0 +1,11 @@
+<form [formGroup]="updateUserForm" (ngSubmit)="updateUser()">
+  <!-- Existing form fields ... -->
+
+  <!-- File input for updating the user's file -->
+  <div class="form-group">
+    <label for="file">Profile Picture</label>
+    <input type="file" class="form-control-file" id="file" (change)="onFileChange($event)" accept=".jpg, .jpeg, .png">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>

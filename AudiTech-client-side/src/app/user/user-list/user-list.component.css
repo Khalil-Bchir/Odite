@@ -1,0 +1,9 @@
+.cropped-image {
+  width: 25px; /* Set the width of the container */
+  height: 25px; /* Set the height of the container */
+  background-size: cover; /* Cover the entire container with the background image */
+  background-position: center; /* Center the background image within the container */
+  border-radius: 50%; /* Apply a circular border-radius for a smooth design */
+  overflow: hidden; /* Hide any overflowing content */
+}
+

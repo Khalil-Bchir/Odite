@@ -1,0 +1,4 @@
+/* Add this to your existing styles or in a style block in your component */
+.dropdown-menu a {
+  cursor: pointer;
+}
