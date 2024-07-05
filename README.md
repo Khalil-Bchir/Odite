@@ -1,7 +1,3 @@
-Sure, here’s a detailed README file for your audit app, Odite:
-
----
-
 # Odite
 
 Odite is an audit application built using Node.js, Express, MongoDB, and Angular. This application provides functionalities for managing audits efficiently, leveraging the power of modern web technologies to offer a robust and scalable solution.
