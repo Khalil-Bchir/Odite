@@ -29,7 +29,7 @@ app.get('/api/', (req, res) => {
     res.send('Welcome to the /api/ route!');
 });
 
-mongoose.connect('mongodb+srv://prestigeproformation:prestigeproformation@cluster0.guzmh23.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }).then((res) => {
+mongoose.connect('mongodb+srv://<username>:<password>@<cluster-url>/<database-name>?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }).then((res) => {
     console.log('Connected to MongoDB');
     app.listen(3000, () => {
         console.log('Running on port 3000!');
