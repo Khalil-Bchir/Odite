@@ -1,14 +1,17 @@
-//server
 const express = require("express");
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
-const UserRoutes = require ('./App/Routers/UserRoutes');
-const CompanySheetRoutes = require ('./App/Routers/CompanySheetRoutes');
-const LogRoutes = require ('./App/Routers/LogRoutes');
-const SectionRoutes = require ('./App/Routers/SectionRoutes');
-const QuestionRoutes = require ('./App/Routers/QuestionRoutes');
-const HeadingRoutes = require ('./App/Routers/HeadingRoutes');
-const AuditSheetRoutes = require ('./App/Routers/AuditeSheetRoutes');
+// Load environment variables from .env file
+dotenv.config();
+
+const UserRoutes = require('./App/Routers/UserRoutes');
+const CompanySheetRoutes = require('./App/Routers/CompanySheetRoutes');
+const LogRoutes = require('./App/Routers/LogRoutes');
+const SectionRoutes = require('./App/Routers/SectionRoutes');
+const QuestionRoutes = require('./App/Routers/QuestionRoutes');
+const HeadingRoutes = require('./App/Routers/HeadingRoutes');
+const AuditSheetRoutes = require('./App/Routers/AuditeSheetRoutes');
 
 const cors = require('cors');
 const app = express();
@@ -29,7 +32,10 @@ app.get('/api/', (req, res) => {
     res.send('Welcome to the /api/ route!');
 });
 
-mongoose.connect('mongodb+srv://<username>:<password>@<cluster-url>/<database-name>?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }).then((res) => {
+// Use the DATABASE_URL from the environment variables
+const databaseUrl = process.env.DATABASE_URL;
+
+mongoose.connect(databaseUrl, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
     console.log('Connected to MongoDB');
     app.listen(3000, () => {
         console.log('Running on port 3000!');
